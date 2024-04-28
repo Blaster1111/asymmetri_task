@@ -8,10 +8,12 @@ class TextFieldWidget extends StatelessWidget {
     Key? key,
     this.controller,
     this.hintText = "",
+    this.onChanged,
   }) : super(key: key);
 
   final TextEditingController? controller;
   final String? hintText;
+  final Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +38,7 @@ class TextFieldWidget extends StatelessWidget {
               color: myFunctions.selectedColorValue,
             ),
           ),
+          onChanged: onChanged,
         ),
       ),
     );

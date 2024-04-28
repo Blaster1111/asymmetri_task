@@ -1,21 +1,9 @@
 import 'dart:async';
-
-import 'package:asymmetri_task/my_data.dart';
+import 'package:asymmetri_task/my_function.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class MyData1 {
-  static const List<String> items = ['Green', 'Blue', 'Purple', 'Red'];
-  static const List<Color> progressColors = [
-    Green,
-    greenMid,
-    greenSecondary,
-    Colors.white,
-  ];
-}
-
 class LoadingBarController extends GetxController {
-  final RxDouble progress = 0.35.obs;
   final RxDouble animationValue = 0.0.obs;
   late Timer timer;
 
@@ -35,18 +23,18 @@ class LoadingBarController extends GetxController {
     timer.cancel();
     super.onClose();
   }
-
-  void updateProgress(double newValue) {
-    progress.value = newValue.clamp(0.0, 1.0);
-    update();
-  }
 }
 
 class LoadingBar extends StatelessWidget {
-  final LoadingBarController controller = Get.put(LoadingBarController());
+  final double progress;
+
+  const LoadingBar({Key? key, required this.progress}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final LoadingBarController controller = Get.put(LoadingBarController());
+    final MyFunctions myFunctions = Get.find<MyFunctions>();
+
     return Obx(
       () => Container(
         margin: EdgeInsets.all(10.0),
@@ -57,11 +45,11 @@ class LoadingBar extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment(-1.0, -1.0),
             end: Alignment(controller.animationValue.value * 2.0 - 1.0, 0.0),
-            colors: MyData1.progressColors,
+            colors: myFunctions.progressColors,
           ),
         ),
         child: FractionallySizedBox(
-          widthFactor: controller.progress.value,
+          widthFactor: progress,
           child: Container(
             decoration: BoxDecoration(
               color: Colors.white,
