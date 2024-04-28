@@ -16,6 +16,8 @@ const Purple = Color(0xFF5E49B2);
 const purpleMid = Color(0xFF5C29D2);
 const purpleSecondary = Color(0xFF5A07F5);
 
+const White = Color(0xFFFFFFFF);
+
 class MyData {
   final TextEditingController totalItemsController = TextEditingController();
   final TextEditingController itemsInLineController = TextEditingController();
